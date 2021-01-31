@@ -4,7 +4,7 @@ on:
   push:
     # Publish `main` as Docker `latest` image.
     branches:
-      - main
+      - master
 
     # Publish `v1.2.3` tags as releases.
     tags:
@@ -20,20 +20,7 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file docker/Dockerfile.linux.amd64
-          fi
+  
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
@@ -44,10 +31,10 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
-       - name: Install Go
-         uses: actions/setup-go@v2
-         with:
-           go-version: '1.15.7'
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.15.7'
       - uses: actions/checkout@v2
 
       - name: Build bin
