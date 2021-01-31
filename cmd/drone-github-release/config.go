@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/drone-plugins/drone-github-release/plugin"
+	"github.com/tomasky/drone-github-release/plugin"
 	"github.com/urfave/cli/v2"
 )
 
@@ -16,7 +16,7 @@ func settingsFlags(settings *plugin.Settings) []cli.Flag {
 		&cli.StringFlag{
 			Name:        "repo-name",
 			Usage:       "repo name",
-			EnvVars:     []string{"PLUGIN_REPO_NAME", "GITHUB_RELEASE_REPO_NAME"},
+			EnvVars:     []string{"DRONE_REPO_NAME", "GITHUB_RELEASE_REPO_NAME"},
 			Destination: &settings.Repo,
 		},
 		&cli.StringFlag{

@@ -1,4 +1,4 @@
-module github.com/drone-plugins/drone-github-release
+module github.com/tomasky/drone-github-release
 
 go 1.14
 

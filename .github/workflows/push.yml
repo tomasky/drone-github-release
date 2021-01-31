@@ -15,7 +15,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: image
+  IMAGE_NAME: main
 
 jobs:
   # Run tests.
@@ -25,7 +25,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     # Ensure test job passes before pushing image.
-    needs: test
+    # needs: test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -38,7 +38,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build bin
-        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -tags netgo -o release/linux/amd64/drone-github-release
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -tags netgo -o release/linux/amd64/drone-github-release ./cmd/drone-github-release
 
       - name: Build image
         run: docker build . --file docker/Dockerfile.linux.amd64 --tag $IMAGE_NAME
