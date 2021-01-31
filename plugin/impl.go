@@ -132,7 +132,7 @@ func (p *Plugin) Execute() error {
 		Client:     client,
 		Context:    p.network.Context,
 		Owner:      p.pipeline.Repo.Owner,
-		Repo:       "scalandk",
+		Repo:       repo,
 		Tag:        strings.TrimPrefix(p.pipeline.Commit.Ref, "refs/tags/"),
 		Draft:      p.settings.Draft,
 		Prerelease: p.settings.Prerelease,
