@@ -14,7 +14,7 @@ import (
 func settingsFlags(settings *plugin.Settings) []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
-			Name:        "repo-name",
+			Name:        "repo",
 			Usage:       "repo name",
 			EnvVars:     []string{"DRONE_REPO_NAME", "GITHUB_RELEASE_REPO_NAME"},
 			Destination: &settings.Repo,
