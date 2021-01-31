@@ -19,6 +19,7 @@ import (
 
 // Settings for the plugin.
 type Settings struct {
+	Repo            string
 	APIKey          string
 	Files           cli.StringSlice
 	FileExists      string
@@ -123,12 +124,15 @@ func (p *Plugin) Execute() error {
 
 	client.BaseURL = p.settings.baseURL
 	client.UploadURL = p.settings.uploadURL
-
+	repo := p.settings.Repo
+	if repo == "" {
+		repo = p.pipeline.Repo.Name
+	}
 	rc := releaseClient{
 		Client:     client,
 		Context:    p.network.Context,
 		Owner:      p.pipeline.Repo.Owner,
-		Repo:       p.pipeline.Repo.Name,
+		Repo:       repo,
 		Tag:        strings.TrimPrefix(p.pipeline.Commit.Ref, "refs/tags/"),
 		Draft:      p.settings.Draft,
 		Prerelease: p.settings.Prerelease,

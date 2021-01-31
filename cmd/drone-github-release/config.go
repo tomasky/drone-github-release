@@ -14,6 +14,12 @@ import (
 func settingsFlags(settings *plugin.Settings) []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
+			Name:        "repo-name",
+			Usage:       "repo name",
+			EnvVars:     []string{"PLUGIN_REPO_NAME", "GITHUB_RELEASE_REPO_NAME"},
+			Destination: &settings.Repo,
+		},
+		&cli.StringFlag{
 			Name:        "api-key",
 			Usage:       "api key to access github api",
 			EnvVars:     []string{"PLUGIN_API_KEY", "GITHUB_RELEASE_API_KEY", "GITHUB_TOKEN"},
